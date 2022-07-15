@@ -1,0 +1,540 @@
+(base) mca@mca-System-Product-Name:~$ mysql -h 192.166.14.71 -u 4vp21Mc044 -p
+Enter password: 
+ERROR 2003 (HY000): Can't connect to MySQL server on '192.166.14.71:3306' (111)
+(base) mca@mca-System-Product-Name:~$ mysql -h 192.166.14.71 -u VP21MC044 -p
+Enter password: 
+ERROR 2003 (HY000): Can't connect to MySQL server on '192.166.14.71:3306' (111)
+(base) mca@mca-System-Product-Name:~$ mysql -h 192.168.14.71 -u VP21MC044 -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 76
+Server version: 8.0.29-0ubuntu0.20.04.3 (Ubuntu)
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> creat database VP21MC044_college;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'creat database VP21MC044_college' at line 1
+mysql> create database VP21MC044_college;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| VP21MC044_college  |
+| information_schema |
++--------------------+
+2 rows in set (0.00 sec)
+
+mysql> use database VP21MC044_college;
+ERROR 1044 (42000): Access denied for user 'VP21MC044'@'%' to database 'database'
+mysql> use VP21MC044_college;
+Database changed
+mysql> create table Branch(branchid varchar(20)PRIMARY KEY,branchname varchar(20),HOD varchar(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table Student(usn varchar(20)PRIMARY KEY,name varchar(20),address varchar(20),sem char(20),branchid varchar(20),foregin key(branchid)references Branch(branchid));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key(branchid)references Branch(branchid))' at line 1
+mysql> create table Student(usn varchar(20)PRIMARY KEY,name varchar(20),address
+varchar(20),branchid varchar(20),foreign key(branchid) reference Branch(branchid));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'reference Branch(branchid))' at line 1
+mysql> create table Student(usn varchar(20)PRIMARY KEY,name varchar(20),address
+varchar(20),branchid varchar(20),foreign key (branchid)  reference Branch(branchid));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'reference Branch(branchid))' at line 1
+mysql> create table Student(usn varchar(20)PRIMARY KEY,name varchar(20),address
+    -> varchar(20),branchid varchar(20),foreign key (branchid)  references Branch(branchid));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database' at line 1
+mysql> show tables;
++-----------------------------+
+| Tables_in_VP21MC044_college |
++-----------------------------+
+| Branch                      |
+| Student                     |
++-----------------------------+
+2 rows in set (0.01 sec)
+
+mysql> create table Book(bookid varchar(20)PRIMARY KEY,bookname char(20),Authorid char(20),publisher char(20),branchid(20),
+    -> 
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(20),' at line 1
+mysql> create table Book(bookid varchar(20)PRIMARY KEY,bookname char(20),Authorid char(20),publisher char(20),branchid(20),foreign key (branchERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(20),foreign key (branchid)  references Branch(branchid))' at line 1
+mysql> create table Book(bookid varchar(20)PRIMARY KEY,bookname char(20),Authorid char(20),publisher char(20),branchid varchar(20),foreign key (branchid)  references Branch(branchid));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show table;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> show tables;
++-----------------------------+
+| Tables_in_VP21MC044_college |
++-----------------------------+
+| Book                        |
+| Branch                      |
+| Student                     |
++-----------------------------+
+3 rows in set (0.00 sec)
+
+mysql> create table Author(authorid varchar(20)PRIMARY KEY,authorname char(20),publisher char(20),branchid varchar(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
++-----------------------------+
+| Tables_in_VP21MC044_college |
++-----------------------------+
+| Author                      |
+| Book                        |
+| Branch                      |
+| Student                     |
++-----------------------------+
+4 rows in set (0.00 sec)
+
+mysql> create table Author(authorid varchar(20)PRIMARY KEY,authorname char(20),publisher char(20),branchid varchar(20));
+ERROR 1050 (42S01): Table 'Author' already exists
+mysql> create table Author(authorid varchar(20)PRIMARY KEY,authorname char(20),country char(20),age int(20));
+ERROR 1050 (42S01): Table 'Author' already exists
+mysql> drop Author;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Author' at line 1
+mysql> delete Author;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> delete from Author;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> create table Author(authorid varchar(20)PRIMARY KEY,authorname char(20),country char(20),age int(20));
+ERROR 1050 (42S01): Table 'Author' already exists
+mysql> show tables;
++-----------------------------+
+| Tables_in_VP21MC044_college |
++-----------------------------+
+| Author                      |
+| Book                        |
+| Branch                      |
+| Student                     |
++-----------------------------+
+4 rows in set (0.00 sec)
+
+mysql> delete from Author;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show tables;
++-----------------------------+
+| Tables_in_VP21MC044_college |
++-----------------------------+
+| Author                      |
+| Book                        |
+| Branch                      |
+| Student                     |
++-----------------------------+
+4 rows in set (0.01 sec)
+
+mysql> create Borrow(usn varcher(20),oreign key (branchid)  references Branch(branchid))
+[1]+  Stopped                 mysql -h 192.168.14.71 -u VP21MC044 -p
+(base) mca@mca-System-Product-Name:~$ mysql -h 192.168.14.71 -u VP21MC044 -p
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'VP21MC044'@'192.168.14.68' (using password: YES)
+(base) mca@mca-System-Product-Name:~$ mysql -h 192.168.14.71 -u VP21MC044 -p
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'VP21MC044'@'192.168.14.68' (using password: YES)
+(base) mca@mca-System-Product-Name:~$ mysql -h 192.168.14.71 -u VP21MC044 -p
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'VP21MC044'@'192.168.14.68' (using password: YES)
+(base) mca@mca-System-Product-Name:~$ mysql -h 192.168.14.71 -u VP21MC044 -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 110
+Server version: 8.0.29-0ubuntu0.20.04.3 (Ubuntu)
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show tables
+    -> ;
+ERROR 1046 (3D000): No database selected
+mysql> create table Branch(branchid varchar(20)PRIMARY KEY,branchname varchar(20),HOD varchar(20));
+ERROR 1046 (3D000): No database selected
+mysql> create database VP21MC044_college;
+ERROR 1007 (HY000): Can't create database 'VP21MC044_college'; database exists
+mysql> create database VP21MC044_collage;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> create table Branch(branchid varchar(20)PRIMARY KEY,branchname varchar(20),HOD varchar(20));
+ERROR 1046 (3D000): No database selected
+mysql> desc branch;
+ERROR 1046 (3D000): No database selected
+mysql> desc Branch;
+ERROR 1046 (3D000): No database selected
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| VP21MC044_collage  |
+| VP21MC044_college  |
+| information_schema |
++--------------------+
+3 rows in set (0.01 sec)
+
+mysql> use VP21MC044_college;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++-----------------------------+
+| Tables_in_VP21MC044_college |
++-----------------------------+
+| Author                      |
+| Book                        |
+| Branch                      |
+| Student                     |
++-----------------------------+
+4 rows in set (0.00 sec)
+
+mysql> drop table Author;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show tables;
++-----------------------------+
+| Tables_in_VP21MC044_college |
++-----------------------------+
+| Book                        |
+| Branch                      |
+| Student                     |
++-----------------------------+
+3 rows in set (0.01 sec)
+
+mysql> create table Author(authorid varchar(20)PRIMARY KEY,authorname char(20),country char(20),age int(20));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> show tables;
++-----------------------------+
+| Tables_in_VP21MC044_college |
++-----------------------------+
+| Author                      |
+| Book                        |
+| Branch                      |
+| Student                     |
++-----------------------------+
+4 rows in set (0.00 sec)
+
+mysql> create Borrow(usn varchar(20),foreign key (usn) references Student(usn),bookid varchar(20),foreign key (bookid) references Book,borrowed_data varchar(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Borrow(usn varchar(20),foreign key (usn) references Student(usn),bookid varchar(' at line 1
+mysql> create Borrow(usn varchar(20),foreign key (usn) references Student(usn),bookid varchar(20),foreign key (bookid) references Book,borrowed_data varchar(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Borrow(usn varchar(20),foreign key (usn) references Student(usn),bookid varchar(' at line 1
+mysql> create table Borrow(usn varchar(20),foreign key (usn) references Student(usn),bookid varchar(20),foreign key (bookid) references Book,borrowed_date date));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> Borrow(usn varchar(20),foreign key (usn) references Student(usn),bookid varchar(20),foreign key (bookid) references Book,borrowed_data varchar(20))create table Borrow(usn varchar(20),foreign key (usn) references Student(usn),bookid varchar(20),foreign key (bookid) references Book,borrowed_date date));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Borrow(usn varchar(20),foreign key (usn) references Student(usn),bookid varchar(' at line 1
+mysql> create table borrow(usn varchar(20),bookid varchar(20),
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> desc student;
+ERROR 1146 (42S02): Table 'VP21MC044_college.student' doesn't exist
+mysql> desc Student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| usn      | varchar(20) | NO   | PRI | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| address  | varchar(20) | YES  |     | NULL    |       |
+| branchid | varchar(20) | YES  | MUL | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> create table borrow(usn varchar(20),bookid varchar(20),borrow_date date,foreign key (usn) references Student,foreign key (bookid) references Book(bookid));
+ERROR 1239 (42000): Incorrect foreign key definition for 'foreign key without name': Key reference and table reference don't match
+mysql> create table borrow(usn varchar(20),bookid varchar(20),borrow_date date,foreign key (usn) references Student,foreign key (bookid) references Book(bookid))
+    -> ;
+ERROR 1239 (42000): Incorrect foreign key definition for 'foreign key without name': Key reference and table reference don't match
+mysql> desc Book;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| bookid    | varchar(20) | NO   | PRI | NULL    |       |
+| bookname  | char(20)    | YES  |     | NULL    |       |
+| Authorid  | char(20)    | YES  |     | NULL    |       |
+| publisher | char(20)    | YES  |     | NULL    |       |
+| branchid  | varchar(20) | YES  | MUL | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> create table borrow(usn varchar(20),bookid varchar(20),borrow_date date,foreign key (usn) references Student(usn),foreign key (bookid) references Book(bookid));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc borrow;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| usn         | varchar(20) | YES  | MUL | NULL    |       |
+| bookid      | varchar(20) | YES  | MUL | NULL    |       |
+| borrow_date | date        | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into Branch values("B1","mca","dr.vandana");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from branch;
+ERROR 1146 (42S02): Table 'VP21MC044_college.branch' doesn't exist
+mysql> select*from Branch;
++----------+------------+------------+
+| branchid | branchname | HOD        |
++----------+------------+------------+
+| B1       | mca        | dr.vandana |
++----------+------------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into Student values("4VP21MC044","shrunga","tumkur","b1","sec");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> desc  Student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| usn      | varchar(20) | NO   | PRI | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| address  | varchar(20) | YES  |     | NULL    |       |
+| branchid | varchar(20) | YES  | MUL | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> insert into Student values("4VP21MC044","shrunga","tumkur","b1");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from Student;
++------------+---------+---------+----------+
+| usn        | name    | address | branchid |
++------------+---------+---------+----------+
+| 4VP21MC044 | shrunga | tumkur  | b1       |
++------------+---------+---------+----------+
+1 row in set (0.00 sec)
+
+mysql> alter table Student add sem varchar(20);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into Student values("4VP21MC044","shrunga","tumkur","b1","2nd");
+ERROR 1062 (23000): Duplicate entry '4VP21MC044' for key 'Student.PRIMARY'
+mysql> insert into Student values("4VP21MC044","shrun","tumkuru","b2","2nd");
+ERROR 1062 (23000): Duplicate entry '4VP21MC044' for key 'Student.PRIMARY'
+mysql> insert into Student values("4VP21MC045","shrun","tumkuru","b2","2nd");
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`VP21MC044_college`.`Student`, CONSTRAINT `Student_ibfk_1` FOREIGN KEY (`branchid`) REFERENCES `Branch` (`branchid`))
+mysql> desc Student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| usn      | varchar(20) | NO   | PRI | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| address  | varchar(20) | YES  |     | NULL    |       |
+| branchid | varchar(20) | YES  | MUL | NULL    |       |
+| sem      | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> insert into Student values("","shree"
+[2]+  Stopped                 mysql -h 192.168.14.71 -u VP21MC044 -p
+(base) mca@mca-System-Product-Name:~$ show databases
+
+Command 'show' not found, but can be installed with:
+
+sudo apt install mailutils-mh  # version 1:3.7-2.1, or
+sudo apt install mmh           # version 0.4-2
+sudo apt install nmh           # version 1.7.1-6
+
+(base) mca@mca-System-Product-Name:~$ show databases;
+
+Command 'show' not found, but can be installed with:
+
+sudo apt install mailutils-mh  # version 1:3.7-2.1, or
+sudo apt install mmh           # version 0.4-2
+sudo apt install nmh           # version 1.7.1-6
+
+(base) mca@mca-System-Product-Name:~$ mysql -h 192.168.14.71 -u VP21MC044 -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 124
+Server version: 8.0.29-0ubuntu0.20.04.3 (Ubuntu)
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| VP21MC044_collage  |
+| VP21MC044_college  |
+| information_schema |
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> use VP21MC044_college;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++-----------------------------+
+| Tables_in_VP21MC044_college |
++-----------------------------+
+| Author                      |
+| Book                        |
+| Branch                      |
+| Student                     |
+| borrow                      |
++-----------------------------+
+5 rows in set (0.01 sec)
+
+mysql> insert into Student values("4VP21MC045","shrun","tumkuru","b2","2nd");
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`VP21MC044_college`.`Student`, CONSTRAINT `Student_ibfk_1` FOREIGN KEY (`branchid`) REFERENCES `Branch` (`branchid`))
+mysql> desc Student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| usn      | varchar(20) | NO   | PRI | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| address  | varchar(20) | YES  |     | NULL    |       |
+| branchid | varchar(20) | YES  | MUL | NULL    |       |
+| sem      | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into Student values("4VP21MC045","shruthi","puttur","b3","2nd");
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`VP21MC044_college`.`Student`, CONSTRAINT `Student_ibfk_1` FOREIGN KEY (`branchid`) REFERENCES `Branch` (`branchid`))
+mysql> select * from branch;
+ERROR 1146 (42S02): Table 'VP21MC044_college.branch' doesn't exist
+mysql> select * from Branch;
++----------+------------+------------+
+| branchid | branchname | HOD        |
++----------+------------+------------+
+| B1       | mca        | dr.vandana |
++----------+------------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into Branch values("B2");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into Branch values("B2","mca","shrunga");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Branch vales("B3","mba","shruthi");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'vales("B3","mba","shruthi")' at line 1
+mysql> insert into Branch values("B3","mba","shruthi");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Student values("4VP21MC045","shrunga","tumkur","B2","2nd");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Student values("4VP21MC046","shru","tumkur","B3","2nd");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from Student;
++------------+---------+---------+----------+------+
+| usn        | name    | address | branchid | sem  |
++------------+---------+---------+----------+------+
+| 4VP21MC044 | shrunga | tumkur  | b1       | NULL |
+| 4VP21MC045 | shrunga | tumkur  | B2       | 2nd  |
+| 4VP21MC046 | shru    | tumkur  | B3       | 2nd  |
++------------+---------+---------+----------+------+
+3 rows in set (0.00 sec)
+
+mysql> insert into Branch vales("B4","mba","shruthi");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'vales("B4","mba","shruthi")' at line 1
+mysql> insert into Branch values("B4","mba","shruthi");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Branch values("B5","mba","teju");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Student values("4VP21MC046","shivani","manglore","B4","2nd");
+ERROR 1062 (23000): Duplicate entry '4VP21MC046' for key 'Student.PRIMARY'
+mysql> insert into Student values("4VP21MC047","shivani","manglore","B4","2nd");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Author values("4VP21MC047","shivani","manglore","B4","2nd");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> desc Author;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| authorid   | varchar(20) | NO   | PRI | NULL    |       |
+| authorname | char(20)    | YES  |     | NULL    |       |
+| country    | char(20)    | YES  |     | NULL    |       |
+| age        | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into Author values("012","shiva","india","34");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Author values("013","deepthi","india","40");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Author values("014","deepu","india","46");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> desc Book;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| bookid    | varchar(20) | NO   | PRI | NULL    |       |
+| bookname  | char(20)    | YES  |     | NULL    |       |
+| Authorid  | char(20)    | YES  |     | NULL    |       |
+| publisher | char(20)    | YES  |     | NULL    |       |
+| branchid  | varchar(20) | YES  | MUL | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into Book values("1","java","012","manglore","b1");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Book values("2","CN","013","banglore","b2");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Book values("3","web","014","mysore","b3");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from Book;
++--------+----------+----------+-----------+----------+
+| bookid | bookname | Authorid | publisher | branchid |
++--------+----------+----------+-----------+----------+
+| 1      | java     | 012      | manglore  | b1       |
+| 2      | CN       | 013      | banglore  | b2       |
+| 3      | web      | 014      | mysore    | b3       |
++--------+----------+----------+-----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> insert into Book values("3","dbms","014","mysore","b3");
+ERROR 1062 (23000): Duplicate entry '3' for key 'Book.PRIMARY'
+mysql> desc borrow;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| usn         | varchar(20) | YES  | MUL | NULL    |       |
+| bookid      | varchar(20) | YES  | MUL | NULL    |       |
+| borrow_date | date        | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into borrow values("4VP21MC044","1","01-01-2003");
+ERROR 1292 (22007): Incorrect date value: '01-01-2003' for column 'borrow_date' at row 1
+mysql> insert into borrow values("4VP21MC044","1",'01-01-2003');
+ERROR 1292 (22007): Incorrect date value: '01-01-2003' for column 'borrow_date' at row 1
+mysql> insert into borrow values("4VP21MC044","1",'2019-12-23');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> 
