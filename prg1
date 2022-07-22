@@ -1,1 +1,4 @@
-i}  select *from Student,Branch where Student.sem="2nd" and Branch.branchname="mca";
+i}  select *from Student,Branch where Student.sem="2nd" and Branch.branchname="mca"; or
+1}   select *from Student where Student.sem ="2nd" and Student.branchid in (select branchid from Branch where branchname="mca");
+    
+
