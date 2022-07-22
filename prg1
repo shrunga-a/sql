@@ -1,0 +1,1 @@
+select *from Student,Branch where Student.sem="2nd" and Branch.branchname="mca";
