@@ -2,7 +2,9 @@ i}  select *from Student,Branch where Student.sem="2nd" and Branch.branchname="m
                                        or
 1}   select *from Student where Student.sem ="2nd" and Student.branchid in (select branchid from Branch where branchname="mca");
 2.   select * from Student where usn not in (select usn from borrow);
-7.   
+
+7.   select bookname from Book ORDER BY bookname DESC;
+    
 
     
 
