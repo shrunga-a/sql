@@ -4,11 +4,17 @@ i}  select *from Student,Branch where Student.sem="2nd" and Branch.branchname="m
 
 2.select * from Student where usn not in (select usn from borrow);
 
-3. select count(*),authorname from Book,Author where Author.Authorid=Book.authorid group by Author.authorid;
-
-5.   select Student.usn,Student.name,Branch.branchname,Book.Bookname,Author.Authorname,borrow.borrow_date from Student,Branch,Book,Author,borrow where Student.branchid =Branch.branchid and Branch.branchid =Book.branchid and Book.authorid =Author.authorid and Student.usn =borrow.usn
+3.   select Student.usn,Student.name,Branch.branchname,Book.Bookname,Author.Authorname,borrow.borrow_date from Student,Branch,Book,Author,borrow where Student.branchid =Branch.branchid and Branch.branchid =Book.branchid and Book.authorid =Author.authorid and Student.usn =borrow.usn
  and Student.sem ="2nd" and Branch.branchname ="mca";
 select count(*)from Book Group by Authorid;
+
+4. select count(*),authorname from Book,Author where Author.Authorid=Book.authorid group by Author.authorid;
+
+5.select usn from Student where usn in(select  usn from borrow where Student.usn=borrow.usn group by usn having count(borrow.usn)>2);
+
+6.select * from Student s where exists(select br.usn from borrow br,Book bk where br.bookid and br.usn=s.usn group by usn having count(distinct authorid)>1);
+
+
 
 
 7.   select bookname from Book ORDER BY bookname DESC;
