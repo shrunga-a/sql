@@ -8,4 +8,11 @@
 +-------+-------+------+
 1 row in set (0.01 sec)
 
-2.
+2.select * from Stadium where Sid=(select Sid from Matches group by Sid order by count(*) desc limit 1);
++-----+-----------+---------+-----------+--------+
+| Sid | Sname     | Pincode | city      | Area   |
++-----+-----------+---------+-----------+--------+
+| 111 | chnnswamy |   56001 | bangalore | mgroad |
++-----+-----------+---------+-----------+--------+
+1 row in set (0.00 sec)
+
