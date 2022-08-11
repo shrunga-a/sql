@@ -1,0 +1,11 @@
+1. Select Pname,Tname,Age from Player p,Team T where p.tid=T.tid and Age in(select min(Age) from Player);
+
+
++-------+-------+------+
+| Pname | Tname | Age  |
++-------+-------+------+
+| kohil | dares | 23   |
++-------+-------+------+
+1 row in set (0.01 sec)
+
+2.
