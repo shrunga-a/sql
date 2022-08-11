@@ -16,3 +16,6 @@
 +-----+-----------+---------+-----------+--------+
 1 row in set (0.00 sec)
 
+3. select *from Player where Pid not in(select Captain_id from Team)and Pid in(select man_of_match from Matches group by man_of_match having count(man_of_match)=2);
+
+Empty set (0.00 sec)
