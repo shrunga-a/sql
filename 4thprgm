@@ -1,0 +1,265 @@
+show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| VP21MC044_Student  |
+| VP21MC044_college  |
+| VP21MC044_games    |
+| information_schema |
+| performance_schema |
++--------------------+
+5 rows in set (0.01 sec)
+
+mysql> create database VP21MC044_tourist
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| VP21MC044_Student  |
+| VP21MC044_college  |
+| VP21MC044_games    |
+| VP21MC044_tourist  |
+| information_schema |
+| performance_schema |
++--------------------+
+6 rows in set (0.01 sec)
+
+mysql> use VP21MC044_tourist;
+Database changed
+mysql> create table tourist(tr_id varchar(20) primary key, trname varchar(20),state varchar(20),km_away varchar(20),history int(100));
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> drop tourist;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tourist' at line 1
+mysql> drop table tourist;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table tourist_plc(tp_id varchar(20) primary key, tpname varchar(20),state varchar(20),km_away varchar(20),history int(100));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> create table tourist(tr_id varchar(20) primary key, trname varchar(20),age varchar(20),country varchar(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table visits(tr_id varchar(20),foreign key(tr_id)references tourist(tr_id),visits_date date,tp_id varchar(20),foreign key(tp_id)references tourist_plc(tp_id));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc tourist;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| tr_id   | varchar(20) | NO   | PRI | NULL    |       |
+| trname  | varchar(20) | YES  |     | NULL    |       |
+| age     | varchar(20) | YES  |     | NULL    |       |
+| country | varchar(20) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into tourist values("101","radha","30","india");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tourist values("102","mina","24","usa");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into tourist values("103","tina","35","india");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> create table email(tr_id varchar(20),foreign key(tr_id)references tourist(tr_id),email varchar(40));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into tourist values("104","rami","56","africa");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into tourist values("105","tony","20","uk");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> desc tourist_plc;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| tp_id   | varchar(20) | NO   | PRI | NULL    |       |
+| tpname  | varchar(20) | YES  |     | NULL    |       |
+| state   | varchar(20) | YES  |     | NULL    |       |
+| km_away | varchar(20) | YES  |     | NULL    |       |
+| history | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> insert into tourist_plc values("t1","coorg","karnataka","101_km","Located amidst imposing mountains in Karnataka with a perpetually misty landscape, Coorg is a popular coffee producing hill station");
+ERROR 1366 (HY000): Incorrect integer value: 'Located amidst imposing mountains in Karnataka with a perpetually misty landscape, Coorg is a popular coffee producing hill stat' for column 'history' at row 1
+mysql> desc tourist_plc;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| tp_id   | varchar(20) | NO   | PRI | NULL    |       |
+| tpname  | varchar(20) | YES  |     | NULL    |       |
+| state   | varchar(20) | YES  |     | NULL    |       |
+| km_away | varchar(20) | YES  |     | NULL    |       |
+| history | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> drop table tourist_plc;
+ERROR 3730 (HY000): Cannot drop table 'tourist_plc' referenced by a foreign key constraint 'visits_ibfk_2' on table 'visits'.
+mysql> drop table tourist_plc;
+ERROR 3730 (HY000): Cannot drop table 'tourist_plc' referenced by a foreign key constraint 'visits_ibfk_2' on table 'visits'.
+mysql> update table tourist_plc set Type="varchar(100)";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table tourist_plc set Type="varchar(100)"' at line 1
+mysql> update tourist_plc modify Type="varchar(100)";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Type="varchar(100)"' at line 1
+mysql> drop table visits;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> drop table tourist_plc;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table tourist_plc(tp_id varchar(20) primary key, tpname varchar(20),state varchar(20),km_away varchar(20),history varchar(100));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table visits(tr_id varchar(20),foreign key(tr_id)references tourist(tr_id),visits_date date,tp_id varchar(20),foreign key(tp_id)references tourist_plc(tp_id));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> nsert into tourist_plc values("t1","coorg","karnataka","101_km","Located amidst imposing mountains in Karnataka with a perpetually misty landscape, Coorg is a popular coffee producing hill station");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'nsert into tourist_plc values("t1","coorg","karnataka","101_km","Located amidst ' at line 1
+mysql> insert into tourist_plc values("t1","coorg","karnataka","101_km","Located
+ amidst imposing mountains in Karnataka with a perpetually misty landscape, Coorg is a popular coffee producing hill station");
+ERROR 1406 (22001): Data too long for column 'history' at row 1
+mysql> insert into tourist_plc values("t1","coorg","karnataka","101_km","hill station");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tourist_plc values("t2","manglore","karnataka","136_km","beachs");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tourist_plc values("t2","badami","karnataka","136_km","beachs");
+ERROR 1062 (23000): Duplicate entry 't2' for key 'tourist_plc.PRIMARY'
+mysql> insert into tourist_plc values("t3","badami","karnataka","136_km","beachs");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tourist_plc values("t4","Alleppey","kerala","177_km","back waters");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tourist_plc values("t4","Wayanad","kerala","188_km","forests");
+ERROR 1062 (23000): Duplicate entry 't4' for key 'tourist_plc.PRIMARY'
+mysql> insert into tourist_plc values("t5","Wayanad","kerala","188_km","forests");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> desc visits;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| tr_id       | varchar(20) | YES  | MUL | NULL    |       |
+| visits_date | date        | YES  |     | NULL    |       |
+| tp_id       | varchar(20) | YES  | MUL | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into visits values("101","t1","2000-08-07");
+ERROR 1292 (22007): Incorrect date value: 't1' for column 'visits_date' at row 1
+mysql> insert into visits values("101","2000-08-07","t1");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into visits values("102","2002-03-04","t2");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into visits values("101","2021-03-04","t2");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into visits values("103","2011-02-21","t3");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into visits values("104","2012-02-21","t4");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into visits values("105","2012-08-21","t5");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into visits values("105","2012-08-21","t3");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> desc email;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| tr_id | varchar(20) | YES  | MUL | NULL    |       |
+| email | varchar(40) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> insert into visits values("105","2012-08-21","t2");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into visits values("101","2012-08-21","t2");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into email values("101","xde@gmail.com");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into email values("102","gigss@gmail.com");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into email values("103","gigss@gmail.com");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into email values("104","rfffuj@gmail.com");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into email values("105","hufgsg@gmail.com");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from tourist_plc;
++-------+----------+-----------+---------+--------------+
+| tp_id | tpname   | state     | km_away | history      |
++-------+----------+-----------+---------+--------------+
+| t1    | coorg    | karnataka | 101_km  | hill station |
+| t2    | manglore | karnataka | 136_km  | beachs       |
+| t3    | badami   | karnataka | 136_km  | beachs       |
+| t4    | Alleppey | kerala    | 177_km  | back waters  |
+| t5    | Wayanad  | kerala    | 188_km  | forests      |
++-------+----------+-----------+---------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select*from tourist;
++-------+--------+------+---------+
+| tr_id | trname | age  | country |
++-------+--------+------+---------+
+| 101   | radha  | 30   | india   |
+| 102   | mina   | 24   | usa     |
+| 103   | tina   | 35   | india   |
+| 104   | rami   | 56   | africa  |
+| 105   | tony   | 20   | uk      |
++-------+--------+------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select*from visits;
++-------+-------------+-------+
+| tr_id | visits_date | tp_id |
++-------+-------------+-------+
+| 101   | 2000-08-07  | t1    |
+| 102   | 2002-03-04  | t2    |
+| 101   | 2021-03-04  | t2    |
+| 103   | 2011-02-21  | t3    |
+| 104   | 2012-02-21  | t4    |
+| 105   | 2012-08-21  | t5    |
+| 105   | 2012-08-21  | t3    |
+| 105   | 2012-08-21  | t2    |
+| 101   | 2012-08-21  | t2    |
++-------+-------------+-------+
+9 rows in set (0.00 sec)
+
+mysql> select*from email;
++-------+------------------+
+| tr_id | email            |
++-------+------------------+
+| 101   | xde@gmail.com    |
+| 102   | gigss@gmail.com  |
+| 103   | gigss@gmail.com  |
+| 104   | rfffuj@gmail.com |
+| 105   | hufgsg@gmail.com |
++-------+------------------+
+5 rows in set (0.00 sec)
+
+mysql> 
+
