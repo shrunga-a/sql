@@ -271,4 +271,13 @@ mysql>
 +-------+--------+------+---------+
 1 row in set (0.00 sec)
 
+4) 
+mysql> select * from tourist where tr_id in(select tr_id from visits,tourist_plc where visits.tp_id=tourist_plc.tp_id group by tr_id having count(distinct state) in(select count(distinct state)from tourist_plc));
++-------+--------+------+---------+
+| tr_id | trname | age  | country |
++-------+--------+------+---------+
+| 105   | tony   | 20   | uk      |
++-------+--------+------+---------+
+1 row in set (0.00 sec)
+
 
