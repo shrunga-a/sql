@@ -262,4 +262,13 @@ mysql> select*from email;
 5 rows in set (0.00 sec)
 
 mysql> 
+3) select * from tourist where tr_id in(select tr_id from visits,tourist_plc where visits.tp_id=tourist_plc.tp_id and state='karnataka' group by tr_id having count(state) in (select count(state)from tourist_plc where state="karnataka"))
+;
++-------+--------+------+---------+
+| tr_id | trname | age  | country |
++-------+--------+------+---------+
+| 101   | radha  | 30   | india   |
++-------+--------+------+---------+
+1 row in set (0.00 sec)
+
 
